@@ -16,14 +16,16 @@
 CC = gcc
 
 # CCFLAGS son los flags que usaremos para compilar el programa.
-# -IWahlaan ayuda a encontrar el HEADERS en el directorio Wahlaan.
 # Para eliminar los mensajes de debug usar "-DNDEBUG".
 CCFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -g
+
+#VFLAGS son los flags que usaremos para correr valgrind.
+VFLAGS = --show-reachable=yes --leak-check=full --tool=memcheck --track-origins=yes
 
 # Los archivos *.o necesarios para la cración del BINARY.
 OBJECTS = array_helpers.o sort.o
 
-# Estos HEADERS son los que se buscaran con la flag -IWahlaan.
+# Estos HEADERS son los que se buscaran.
 HEADERS = array_helpers.h sort.h
 
 # El archivo BINARY va a ser el ejecutable.
@@ -49,13 +51,13 @@ main: main.c $(OBJECTS)
 	$(CC) $(CCFLAGS) -o $@ $?
 
 run: $(BINARY)
-	./main ./input/example-unsorted.in
+	./main $(filter-out $@, $(MAKECMDGOALS))
 
 valgrind: $(BINARY)
-	valgrind --show-reachable=yes --leak-check=full --tool=memcheck --track-origins=yes ./main
+	valgrind $(VFLAGS) ./main $(filter-out $@, $(MAKECMDGOALS))
 
 debug: $(BINARY)
-	gdb ./main
+	gdb ./main $(filter-out $@, $(MAKECMDGOALS))
 
 clean:
 	rm -f $(BINARY) $(OBJECTS) *.gch *.gdb_history

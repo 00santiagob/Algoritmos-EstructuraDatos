@@ -12,7 +12,8 @@
 
 void print_help(char *program_name) {
     /* Print the usage help of this program. */
-    printf("Usage: %s <input file path>\n\n"
+    printf("\n"
+           "Usage: %s <input file path>\n\n"
            "Sort an array given in a file in disk.\n"
            "\n"
            "The input file must have the following format:\n"
@@ -34,7 +35,7 @@ char *parse_filepath(int argc, char *argv[]) {
         print_help(argv[0]);
         exit(EXIT_FAILURE);
     }
-    result = argv[1];
+    result = argv[argc - 1];
     return (result);
 }
 

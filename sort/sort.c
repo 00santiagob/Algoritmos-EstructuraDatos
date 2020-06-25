@@ -14,21 +14,6 @@ static void swap(int a[], unsigned int i, unsigned int j) {
     a[j] = tmp;
 }
 
-bool is_sorted(int array[], unsigned int length, bool order) {
-    /* Comprueba que se haya ordenado*/
-    bool is_sorted = true;
-        for (unsigned int i = 1; i < (length) && is_sorted; i++) {
-            if (array[i-1] > array[i] && order) {
-                is_sorted = false;
-            }
-            else if (array[i-1] < array[i] && !order) {
-                is_sorted = false;
-            }
-            else { continue; }
-        }
-    return (is_sorted);
-}
-
 static unsigned int min_pos_from(int a[], unsigned int i, unsigned int length) {
     unsigned int min_pos = i;
     for (unsigned int j = i + 1; j < length; j++) {
@@ -46,4 +31,13 @@ void selection_sort(int a[], unsigned int length) {
     }
 }
 
-
+bool is_sorted(int array[], unsigned int length) {
+    /* Comprueba que se haya ordenado*/
+    bool is_sorted = true;
+        for (unsigned int i = 1; i < (length) && is_sorted; i++) {
+            if (array[i-1] > array[i]) {
+                is_sorted = false;
+            }
+        }
+    return (is_sorted);
+}

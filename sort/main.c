@@ -50,11 +50,11 @@ int main(int argc, char *argv[]) {
     int copy[MAX_SIZE];
     array_copy(copy, array, length);
     /* do the actual sorting */
-    selection_sort(array, length);
+    selection_sort(copy, length);
     /* show the ordered array in the screen */
-    array_dump(array, length);
+    array_dump(copy, length);
     /* check if it is sorted */
-    assert(is_sorted(array, length, true));
+    assert(is_sorted(copy, length));
     /* check if it is a permutation of original */
     if (array_is_permutation_of(copy,array,length)) {
         printf("Your new array is a permutation of the original \n");

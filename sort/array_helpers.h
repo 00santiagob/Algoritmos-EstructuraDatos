@@ -3,10 +3,12 @@
 
 #include <stdbool.h>
 
-bool array_is_permutation_of(int a[], int other[], unsigned int length);
-/*
-    Return whether the array 'other' is a permutation of the array 'a'.
-    The arrays 'a' and 'other' must have both the same 'length'.
+void array_copy(int dst[], int src[], unsigned int length);
+/* 
+    'src': original array
+    'dst': destiny array
+    Copy the array 'src' into the array 'dst'
+    I always assume that the size of src is smaller or equal to dst.
 */
 
 void array_dump(int a[], unsigned int length);
@@ -15,11 +17,10 @@ void array_dump(int a[], unsigned int length);
     exactly 'length' elements.
 */
 
-void array_copy(int dst[], int src[], unsigned int length);
-/* 
-    'src': original array
-    'dst': destiny array
-    Copy the array 'src' into the array 'dst' 
+bool array_is_permutation_of(int a[], int other[], unsigned int length);
+/*
+    Return whether the array 'other' is a permutation of the array 'a'.
+    The arrays 'a' and 'other' must have both the same 'length'.
 */
 
 unsigned int array_from_file(int a[], unsigned int max_size, const char *filepath);

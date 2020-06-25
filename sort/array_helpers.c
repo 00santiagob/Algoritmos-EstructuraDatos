@@ -9,16 +9,6 @@ void array_copy(int copy[], int array[], unsigned int length) {
     }
 }
 
-unsigned int array_value_count(int a[], unsigned int length, int value) {
-    unsigned int count = 0;
-    for (unsigned int i = 0; i < length; i++) {
-        if (a[i] == value) {
-            count++;
-        }
-    }
-    return (count);
-}
-
 void array_dump(int a[], unsigned int length) {
     fprintf(stdout, "%u\n", length);
     for (unsigned int i = 0; i < length; i++) {
@@ -31,6 +21,15 @@ void array_dump(int a[], unsigned int length) {
     }
 }
 
+unsigned int array_value_count(int a[], unsigned int length, int value) {
+    unsigned int count = 0;
+    for (unsigned int i = 0; i < length; i++) {
+        if (a[i] == value) {
+            count++;
+        }
+    }
+    return (count);
+}
 
 bool array_is_permutation_of(int a[], int b[], unsigned int length) {
     unsigned int i = 0;

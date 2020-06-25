@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
     /* show the ordered array in the screen */
     array_dump(array, length);
     /* check if it is sorted */
-    assert(array_is_sorted(array, length));
+    assert(is_sorted(array, length, true));
     /* check if it is a permutation of original */
     if (array_is_permutation_of(copy,array,length)) {
         printf("Your new array is a permutation of the original \n");
@@ -62,6 +62,5 @@ int main(int argc, char *argv[]) {
     else {
         printf("Your new array is not a permutation of the original \n");
     }
-    /* Needs implementation */
     return (EXIT_SUCCESS);
 }

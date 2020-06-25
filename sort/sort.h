@@ -3,8 +3,12 @@
 
 #include <stdbool.h>
 
-bool array_is_sorted(int a[], unsigned int length);
-/* Checks if the array 'a' is in ascending order */
+bool is_sorted(int a[], unsigned int length, bool order);
+/*
+    Checks if the array 'a' is in order.
+    
+    If the order is ascending, then order is true, otherwise it is false.
+*/
 
 void selection_sort(int a[], unsigned int length);
 /*

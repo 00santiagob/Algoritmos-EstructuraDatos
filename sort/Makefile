@@ -55,7 +55,7 @@ valgrind: $(BINARY)
 	valgrind --show-reachable=yes --leak-check=full --tool=memcheck --track-origins=yes ./main
 
 debug: $(BINARY)
-	gdb ./main ./input/example-unsorted.in
+	gdb ./main
 
 clean:
 	rm -f $(BINARY) $(OBJECTS) *.gch *.gdb_history

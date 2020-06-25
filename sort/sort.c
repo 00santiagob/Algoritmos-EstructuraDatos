@@ -14,13 +14,17 @@ static void swap(int a[], unsigned int i, unsigned int j) {
     a[j] = tmp;
 }
 
-bool array_is_sorted(int array[], unsigned int length) {
+bool is_sorted(int array[], unsigned int length, bool order) {
     /* Comprueba que se haya ordenado*/
     bool is_sorted = true;
-        for (unsigned int i = 1; i < (length) && is_sorted; i++) { 
-            if (array[i-1] > array[i]) {
+        for (unsigned int i = 1; i < (length) && is_sorted; i++) {
+            if (array[i-1] > array[i] && order) {
                 is_sorted = false;
             }
+            else if (array[i-1] < array[i] && !order) {
+                is_sorted = false;
+            }
+            else { continue; }
         }
     return (is_sorted);
 }

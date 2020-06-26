@@ -3,19 +3,18 @@
 
 #include <stdbool.h>
 
-void selection_sort(int a[], unsigned int length);
+void selection_sort(int a[], unsigned int length, bool order);
 /*
-    Sort the array 'a' using the Selection sort algorithm. The resulting sort
-    will be ascending.
-
+    Sort the array 'a' using the Selection sort algorithm.
+    If order is false, then is ascending order, otherwise it is descending order.
     The array 'a' must have exactly 'length' elements.
 
 */
 
-bool is_sorted(int a[], unsigned int length);
+bool is_sorted(int a[], unsigned int length, bool order);
 /*
     Checks if the array 'a' is in order.
-    Always assume that the order is ascending.
+    If order is false, then is ascending order, otherwise it is descending order.
 */
 
 #endif

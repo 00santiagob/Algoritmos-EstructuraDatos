@@ -23,10 +23,10 @@ CCFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -g
 VFLAGS = --show-reachable=yes --leak-check=full --tool=memcheck --track-origins=yes
 
 # Los archivos *.o necesarios para la cración del BINARY.
-OBJECTS = array_helpers.o sort.o
+OBJECTS = array_helpers.o sort_helpers.o sort.o
 
 # Estos HEADERS son los que se buscaran.
-HEADERS = array_helpers.h sort.h
+HEADERS = array_helpers.h sort_helpers.h sort.h
 
 # El archivo BINARY va a ser el ejecutable.
 BINARY = main

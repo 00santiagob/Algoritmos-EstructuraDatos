@@ -6,6 +6,7 @@
 
 /* Then, this project's includes, alphabetically ordered */
 #include "array_helpers.h"
+#include "sort_helpers.h"
 #include "sort.h"
 
 /* Maximum allowed length of the array */
@@ -56,6 +57,7 @@ int main(int argc, char *argv[]) {
     unsigned int length = array_from_file(array, MAX_SIZE, filepath);
     /* create a copy of the array, to do some checks later */
     int copy[MAX_SIZE];
+
     bool order_b = false; // false: ascending order and true: descending order
     int order_i = 0; // 0 = false and 1 = true
     while (order_i < 2) {
@@ -63,8 +65,38 @@ int main(int argc, char *argv[]) {
         array_copy(copy, array, length);
         /* start to calculate the time */
         elapsed = getMilliseconds();
+        printf("\n###### SELECTION SORT ######\n");
         /* do the actual sorting */
         selection_sort(copy, length, order_b);
+        /* the time elapsed is calculated */
+        elapsed_aux = elapsed;
+        elapsed = getMilliseconds();
+        elapsed =  elapsed - elapsed_aux;
+        printf("Elapsed milliseconds = %g\n", elapsed);
+        /* show the ordered array in the screen */
+        array_dump(copy, length);
+        /* check if it is sorted */
+        assert(is_sorted(copy, length, order_b));
+        /* check if it is a permutation of original */
+        if (array_is_permutation_of(copy,array,length)) {
+            printf("Your new array is a permutation of the original \n");
+        }
+        else {
+            printf("Your new array is not a permutation of the original \n");
+        }
+        order_i += 1;
+        order_b = !order_b;
+    }
+    order_b = false; // false: ascending order and true: descending order
+    order_i = 0; // 0 = false and 1 = true
+    while (order_i < 2) {
+        /* an order is given to start */
+        array_copy(copy, array, length);
+        /* start to calculate the time */
+        elapsed = getMilliseconds();
+        printf("\n###### INSERTION SORT ######\n");
+        /* do the actual sorting */
+        insertion_sort(copy, length, order_b);
         /* the time elapsed is calculated */
         elapsed_aux = elapsed;
         elapsed = getMilliseconds();

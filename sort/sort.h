@@ -11,10 +11,12 @@ void selection_sort(int a[], unsigned int length, bool order);
 
 */
 
-bool is_sorted(int a[], unsigned int length, bool order);
+void insertion_sort(int a[], unsigned int length, bool order);
 /*
-    Checks if the array 'a' is in order.
+    Sort the array 'a' using the Insertion sort algorithm.
     If order is false, then is ascending order, otherwise it is descending order.
+    The array 'a' must have exactly 'length' elements.
+
 */
 
 #endif

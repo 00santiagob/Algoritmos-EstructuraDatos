@@ -1,22 +1,10 @@
 #include <assert.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "array_helpers.h"
+#include "sort_helpers.h"
 #include "sort.h"
-
-
-static void swap(int a[], unsigned int i, unsigned int j) {
-    /* 'i' y 'j' son los indices a permutar*/
-    int tmp = a[i];
-    a[i] = a[j];
-    a[j] = tmp;
-}
-
-static bool goes_before(int x, int y) {
-return (x<=y);
-}
 
 static unsigned int min_pos_from(int a[], unsigned int i, unsigned int length) {
     unsigned int min_pos = i;
@@ -51,17 +39,25 @@ void selection_sort(int a[], unsigned int length, bool order) {
     }
 }
 
-bool is_sorted(int array[], unsigned int length, bool order) {
-    /* Comprueba que se haya ordenado*/
-    bool is_sorted = true;
-        for (unsigned int i = 1; goes_before(i, length-1) && is_sorted; i++) {
-            if (!goes_before(array[i-1], array[i]) && !order) {
-                is_sorted = false;
-            }
-            else if (goes_before(array[i-1], array[i]) && order) {
-                is_sorted = false;
-            }
-            else { continue;}
+static void insert(int a[], unsigned int i, bool order) {
+    int j = i;
+    if (!order) {
+        while (goes_before(1, j) && !goes_before(a[j-1], a[j])) {
+            swap(a, j-1, j);
+            j -= 1;
         }
-    return (is_sorted);
+    }
+    else {
+        while (goes_before(1, j) && goes_before(a[j-1], a[j])) {
+            swap(a, j-1, j);
+            j -= 1;
+        }
+    }
+}
+
+void insertion_sort(int a[], unsigned int length, bool order) {
+    for (unsigned int i = 1; goes_before(i, length-1); i++) {
+        assert(is_sorted(a, i-1, order));
+        insert(a, i, order);
+    }
 }

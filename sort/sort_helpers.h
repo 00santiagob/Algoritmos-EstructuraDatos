@@ -9,15 +9,15 @@ void swap(int a[], unsigned int i, unsigned int j);
     Array remains the same if the two positions are the same
 */
 
+void swap_ui(unsigned int a[], unsigned int i, unsigned int j);
+/*
+    Exchanges elements of array 'a' in the given positions 'i' and 'j'
+    Array remains the same if the two positions are the same
+*/
+
 bool goes_before(int x, int y);
 /*
     Abstract total order for sorting algorithms
-*/
-
-bool is_sorted(int a[], unsigned int length, bool order);
-/*
-    Checks if the array 'a' is in order.
-    If order is false, then is ascending order, otherwise it is descending order.
 */
 
 unsigned int partition(int a[], unsigned int izq, unsigned int der, bool order);

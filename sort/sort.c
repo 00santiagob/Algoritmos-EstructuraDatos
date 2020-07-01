@@ -74,3 +74,94 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, bool ord
 void quick_sort(int a[], unsigned int length, bool order) {
     quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, order);
 }
+
+static void next_permutation(unsigned int perm[], unsigned int length) {
+    unsigned int i, j;
+    /*
+        taken (and modified) from
+        https://www.nayuki.io/page/next-lexicographical-permutation-algorithm 
+    */
+    // Find non-increasing suffix
+    i = length - 1;
+    while (i > 0 && goes_before(perm[i], perm[i-1])) {
+        i--;
+    }
+    // Find successor to pivot
+    j = length - 1;
+    while (goes_before(perm[j], perm[i-1])) {
+        j--;
+    }
+    swap_ui(perm, i-1, j);
+    // Reverse suffix
+    j = length - 1;
+    while (i < j) {
+        swap_ui(perm, i, j);
+        i++;
+        j--;
+    }
+}
+
+static void mk_fst_permutation(unsigned int perm[], unsigned int length) {
+/* makes the first permutation 0 1 2 ... length-1 */
+    unsigned int i = 0;
+    while (i < length) {
+        perm[i] = i;
+        i = i + 1;
+    }
+}
+
+static bool sorted(int a[], unsigned int perm[], unsigned int length, bool order) {
+/*
+    returns true if the array a would be sorted following the order indicated by perm
+    (the ordering relation is determined by the abstract function goes_before)
+*/
+    bool res = true;
+    unsigned int i = 0;
+    while (((length == 0) ? 0 : length-1) && i<length-1 && res) {
+        if(!order) {
+            res = goes_before(a[perm[i]],a[perm[i+1]]) && res;
+            i = i+1;
+        }
+        else {
+            res = goes_before(a[perm[i+1]],a[perm[i]]) && res;
+            i = i+1;
+        }
+    }
+    return res;
+}
+
+static void update(int a[], unsigned int perm[], unsigned int length) {
+/* resets a according to the order indicated in perm */
+    int copy[length];
+    array_copy(copy,a,length);
+    unsigned int i = 0;
+    while (i < length) {
+        a[i] = copy[perm[i]];
+        i = i + 1;
+    }
+}
+
+void permutation_sort(int a[], unsigned int length, bool order) {
+/* tries systematically with all te possible permutations until a sorted one is found */
+    unsigned int perm[length];
+    mk_fst_permutation(perm, length);
+    while (!sorted(a, perm, length, order)) {
+        next_permutation(perm, length);
+    }
+    update(a, perm, length);
+}
+
+bool is_sorted(int array[], unsigned int length, bool order) {
+    /* Check that it has been ordered */
+    bool is_sorted = true;
+        for (unsigned int i = 1; goes_before(i, length-1) && is_sorted; i++) {
+            if (!goes_before(array[i-1], array[i]) && !order) {
+                is_sorted = false;
+            }
+            else if (goes_before(array[i-1], array[i]) && order) {
+                is_sorted = false;
+            }
+            else { continue;}
+        }
+    return (is_sorted);
+}

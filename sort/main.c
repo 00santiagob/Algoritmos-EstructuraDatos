@@ -6,7 +6,6 @@
 
 /* Then, this project's includes, alphabetically ordered */
 #include "array_helpers.h"
-#include "sort_helpers.h"
 #include "sort.h"
 
 /* Maximum allowed length of the array */
@@ -58,8 +57,8 @@ int main(int argc, char *argv[]) {
     /* create a copy of the array, to do some checks later */
     int copy[MAX_SIZE];
     bool order_b = false; // false: ascending order and true: descending order
-    char *order_p = NULL;
     int order_i = 0; // 0 = false and 1 = true
+    char *order_p = NULL;
     while (order_i < 2) {
         /* start to calculate the time */
         elapsed = getMilliseconds();
@@ -144,6 +143,41 @@ int main(int argc, char *argv[]) {
         printf("\n###### QUICK SORT %s ######\n", order_p);
         /* do the actual sorting */
         quick_sort(copy, length, order_b);
+        /* show the ordered array in the screen */
+        array_dump(copy, length);
+        /* check if it is sorted */
+        assert(is_sorted(copy, length, order_b));
+        /* check if it is a permutation of original */
+        if (array_is_permutation_of(copy,array,length)) {
+            printf("Your new array is a permutation of the original \n");
+        }
+        else {
+            printf("Your new array is not a permutation of the original \n");
+        }
+        /* the time elapsed is calculated */
+        elapsed_aux = elapsed;
+        elapsed = getMilliseconds();
+        elapsed =  elapsed - elapsed_aux;
+        printf("Elapsed milliseconds = %g\n", elapsed);
+        order_i += 1;
+        order_b = !order_b;
+    }
+    order_b = false; // false: ascending order and true: descending order
+    order_i = 0; // 0 = false and 1 = true
+    while (order_i < 2) {
+        /* start to calculate the time */
+        elapsed = getMilliseconds();
+        if(!order_b) {
+            order_p = "ASCENDING";
+        }
+        else {
+            order_p = "DESCENDING";
+        }
+        /* an order is given to start */
+        array_copy(copy, array, length);
+        printf("\n###### PERMUTATION SORT %s ######\n", order_p);
+        /* do the actual sorting */
+        permutation_sort(copy, length, order_b);
         /* show the ordered array in the screen */
         array_dump(copy, length);
         /* check if it is sorted */

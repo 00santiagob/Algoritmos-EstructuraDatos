@@ -12,6 +12,43 @@ bool goes_before(int x, int y) {
 return (x <= y);
 }
 
+unsigned int partition(int a[], unsigned int izq, unsigned int der, bool order) {
+    int piv = izq;
+    int i = izq + 1;
+    int j = der;
+    while(i <= j) {
+        if(!order) {
+            if(a[i] <= a[piv]){
+                i += 1;
+            }
+            else if(a[j] > a[piv]) {
+                j -= 1;
+            }
+            else {
+                swap(a, i, j);
+                i += 1;
+                j -= 1;
+            }
+        }
+        else {
+            if(a[i] > a[piv]){
+                i += 1;
+            }
+            else if(a[j] <= a[piv]) {
+                j -= 1;
+            }
+            else {
+                swap(a, i, j);
+                i += 1;
+                j -= 1;
+            }
+        }
+    }
+    swap(a, piv, j);
+    piv = j;
+    return(piv);
+}
+
 bool is_sorted(int array[], unsigned int length, bool order) {
     /* Comprueba que se haya ordenado*/
     bool is_sorted = true;

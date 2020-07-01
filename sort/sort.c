@@ -61,3 +61,16 @@ void insertion_sort(int a[], unsigned int length, bool order) {
         insert(a, i, order);
     }
 }
+
+static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, bool order) {
+    int pivot;
+    if (der > izq) {
+    pivot = partition(a, izq, der, order);
+    quick_sort_rec(a, izq, (pivot == 0) ? 0 : pivot - 1, order);
+    quick_sort_rec(a, pivot+1, der, order);
+    }
+}
+
+void quick_sort(int a[], unsigned int length, bool order) {
+    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, order);
+}

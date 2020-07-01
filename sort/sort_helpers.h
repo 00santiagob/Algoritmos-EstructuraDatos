@@ -20,4 +20,12 @@ bool is_sorted(int a[], unsigned int length, bool order);
     If order is false, then is ascending order, otherwise it is descending order.
 */
 
+unsigned int partition(int a[], unsigned int izq, unsigned int der, bool order);
+/*
+    Permutes elements of a[izq..der] and returns pivot such that:
+    - izq <= pivot <= der
+    - all elements in a[izq,pivot) 'goes_before' a[pivot]
+    - a[pivot] 'goes_before' all the elements in a(pivot,der]
+*/
+
 #endif

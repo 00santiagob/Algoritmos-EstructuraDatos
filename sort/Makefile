@@ -20,7 +20,8 @@ CC = gcc
 CCFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -g
 
 #VFLAGS son los flags que usaremos para correr valgrind.
-VFLAGS = --show-reachable=yes --leak-check=full --tool=memcheck --track-origins=yes
+VFLAGS = --show-reachable=yes --leak-check=full
+		 --tool=memcheck --track-origins=yes
 
 # Los archivos *.o necesarios para la cración del BINARY.
 OBJECTS = array_helpers.o sort_helpers.o sort.o
@@ -35,7 +36,8 @@ BINARY = main
 # OBJETIVOS #
 #-----------#
 
-# Si uno solo escribe "make", se ejecuta all, ya que es el primer objetivo que aparece en el Makefile.
+# Si uno solo escribe "make", se ejecuta all,
+# ya que es el primer objetivo que aparece en el Makefile.
 all: clean $(BINARY)
 
 # Todos los archivos *.o se crearan en la carpeta principal.
